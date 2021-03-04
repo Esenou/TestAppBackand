@@ -3,6 +3,8 @@ package com.example.demo.service.auth.impl;
 import com.example.demo.entity.User;
 import com.example.demo.enums.Role;
 import com.example.demo.exception.CustomException;
+import com.example.demo.model.UserCreate;
+import com.example.demo.model.UserModel;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.JwtTokenProvider;
 import com.example.demo.service.auth.AuthService;
@@ -51,16 +53,20 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
- /*   @Override
-    public String signup(User user) {
-        if (!userRepository.existsByUsername(user.getUsername())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+    @Override
+    public String signup(UserCreate userModel) {
+        if (!userRepository.existsByUsername(userModel.getUsername())) {
+            userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+            User user = new User();
+            user.setUsername(userModel.getUsername());
+            user.setPassword(userModel.getPassword());
+            user.setRoles(userModel.getRoles());
             userRepository.save(user);
             return jwtTokenProvider.createToken(user.getUsername(), user.getRoles());
         } else {
             throw new CustomException("Username is already in use", HttpStatus.UNPROCESSABLE_ENTITY);
         }
-    }*/
+    }
 
 
     @Override

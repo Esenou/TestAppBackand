@@ -32,10 +32,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Entry points
         http.authorizeRequests()//
-                .antMatchers("/users/signin").permitAll()//
-                .antMatchers("/users/signup").permitAll()//
-                .antMatchers("/h2-console/**/**").permitAll()
-                .antMatchers("/api/**/findAll/**").permitAll()
+                .antMatchers("/api/auth/signin").permitAll()//
+                .antMatchers("/api/auth/signup").permitAll()//
+                .antMatchers("/h2-console/**/**").permitAll()//
+                .antMatchers("/api/**/findAll/**").permitAll()//
+                .antMatchers("/api/**/creat").permitAll()//
+                .antMatchers("/api/**/update/**").permitAll()//
+                .antMatchers("/api/**/delete/**").permitAll()//
+                .antMatchers("/api/**/findById/**").permitAll()//
+                .antMatchers("/api/**/findAllByUsername").permitAll()//
                 // Disallow everything else..
                 .anyRequest().authenticated();
 
@@ -58,8 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/configuration/**")//
                 .antMatchers("/webjars/**")//
                 .antMatchers("/public")
-                .antMatchers("/api/auth/**")//
-
                 // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
                 .and()
                 .ignoring()
